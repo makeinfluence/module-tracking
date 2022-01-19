@@ -4,6 +4,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Stdlib\CookieManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Store\Model\ScopeInterface;
 
@@ -14,11 +15,13 @@ class Tracking extends \Magento\Framework\View\Element\Template
     private \Magento\Framework\App\RequestInterface $request;
 
     const MAKEINFLUENCE_TRACKING_URL = 'https://system.makeinfluence.com/track-conversion';
+    public CookieManagerInterface $cookieManager;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         Session              $checkoutSession,
         RequestInterface     $request,
+        CookieManagerInterface $cookieManager,
         Template\Context     $context,
         array                $data = []
     )
@@ -27,6 +30,7 @@ class Tracking extends \Magento\Framework\View\Element\Template
         $this->checkoutSession = $checkoutSession;
         $this->scopeConfig = $scopeConfig;
         $this->request = $request;
+        $this->cookieManager = $cookieManager;
     }
 
     /**
@@ -40,12 +44,14 @@ class Tracking extends \Magento\Framework\View\Element\Template
         $ip = $this->request->getServerValue('REMOTE_ADDR');
         $userAgent = $this->request->getServerValue('HTTP_USER_AGENT');
         $httpReferer = $this->request->getServerValue('HTTP_REFERER');
+        $miid = $this->cookieManager->getCookie('_miid') ?? '';
 
         $valueFormatted = number_format($order->getBaseSubtotalInclTax(), 2, '.', '');
 
         return [
             'business_id' => $businessId,
             'unique_id' => $order->getIncrementId(),
+            'cookie_id' => $miid,
             'value' => $valueFormatted,
             'promotion_code' => $order->getCouponCode(),
             'created_at' => $date->format('Y-m-d H:i:s'),
