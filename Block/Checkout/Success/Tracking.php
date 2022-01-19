@@ -39,20 +39,18 @@ class Tracking extends \Magento\Framework\View\Element\Template
     public function prepareTrackingData()
     {
         $date = new \DateTime();
-        $order = $this->checkoutSession->getLastRealOrder();
+        $order = $this->getOrder();
         $businessId = $this->getBusinessId();
         $ip = $this->request->getServerValue('REMOTE_ADDR');
         $userAgent = $this->request->getServerValue('HTTP_USER_AGENT');
         $httpReferer = $this->request->getServerValue('HTTP_REFERER');
         $miid = $this->cookieManager->getCookie('_miid') ?? '';
 
-        $valueFormatted = number_format($order->getBaseSubtotalInclTax(), 2, '.', '');
-
         return [
             'business_id' => $businessId,
-            'unique_id' => $order->getIncrementId(),
+            'unique_id' => $this->getOrderId(),
             'cookie_id' => $miid,
-            'value' => $valueFormatted,
+            'value' => $this->getOrderValue(),
             'promotion_code' => $order->getCouponCode(),
             'created_at' => $date->format('Y-m-d H:i:s'),
             'currency' => $order->getOrderCurrencyCode(),
@@ -68,6 +66,32 @@ class Tracking extends \Magento\Framework\View\Element\Template
             'makeinfluence/general/enabled',
             ScopeInterface::SCOPE_STORE
         );
+    }
+
+    public $order = null;
+    public function getOrder()
+    {
+        if($this->order === null)
+            $this->order = $this->checkoutSession->getLastRealOrder();
+        return $this->order;
+    }
+
+    public function getOrderId()
+    {
+        $order = $this->getOrder();
+        return $order->getIncrementId();
+    }
+
+    public function getOrderValue()
+    {
+        $order = $this->getOrder();
+        return number_format($order->getBaseSubtotalInclTax(), 2, '.', '');
+    }
+
+    public function getCouponCode()
+    {
+        $order = $this->getOrder();
+        return $order->getCouponCode();
     }
 
     public function getBusinessId()
