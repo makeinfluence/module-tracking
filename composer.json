@@ -1,0 +1,22 @@
+{
+    "name": "wexo/makeinfluence",
+    "description": "Wexo MakeInfluence module, created for MakeInfluence and is used to send tracking information related to affiliate deals with MakeInfluence",
+    "require": {
+        "magento/magento-composer-installer": "*",
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "suggest": {
+    },
+    "type": "magento2-module",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Wexo\\MakeInfluence\\": ""
+        }
+    }
+}

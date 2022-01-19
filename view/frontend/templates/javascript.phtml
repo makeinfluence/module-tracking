@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @var $block \Wexo\MakeInfluence\Block\Javascript
+ */
+
+?>
+<?php if($block->addJavascript()):?>
+<script>
+    (function(m,a,k,e,i,n,f) {
+        m['MakeInfluenceObject']=i;m[i]=m[i]||{q:[]},
+        m[i]=new Proxy(m[i],{get:function(t,p,r){return t.hasOwnProperty(p)
+        ?t[p]:function(){m[i].q.push({n:p,a:arguments})}}}),n=a.createElement(k),
+        f=a.getElementsByTagName(k)[0],n.async=1,n.src=e+'?'+Math.floor(new Date()
+        /864e5);f.parentNode.insertBefore(n,f);
+    })(window,document,'script','//scripts.makeinfluence.com/a.js', 'MI');
+
+    MI.set('business_id', '<?= $block->getBusinessId() ?>');
+    MI.send('pageview');
+</script>
+<?php endif; ?>
