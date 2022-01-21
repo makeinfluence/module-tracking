@@ -1,0 +1,12 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+            <makeinfluence>
+                <general>
+                    <enabled>1</enabled>
+                    <s2s_tracking>1</s2s_tracking>
+                    <frontend_tracking>1</frontend_tracking>
+                    <add_js>1</add_js>
+                </general>
+            </makeinfluence>
+    </default>
+</config>
