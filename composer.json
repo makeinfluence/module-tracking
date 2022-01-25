@@ -1,6 +1,6 @@
 {
-    "name": "wexo/makeinfluence",
-    "description": "Wexo MakeInfluence module, created for MakeInfluence and is used to send tracking information related to affiliate deals with MakeInfluence",
+    "name": "makeinfluence/module-tracking",
+    "description": "Wexo's MakeInfluence module, created for MakeInfluence and is used to send tracking information related to affiliate deals with MakeInfluence",
     "require": {
         "magento/magento-composer-installer": "*",
         "guzzlehttp/guzzle": "^7.4"

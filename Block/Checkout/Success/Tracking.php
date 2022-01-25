@@ -1,4 +1,4 @@
-<?php namespace Wexo\MakeInfluence\Block\Checkout\Success;
+<?php namespace MakeInfluence\Tracking\Block\Checkout\Success;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Magento\Checkout\Model\Session;
@@ -141,31 +141,7 @@ class Tracking extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Verifies if backend tracking is enabled via Stores => Configuration => MakeInfluence => Configuration
-     * @return bool
-     */
-    public function isS2StrackingEnabled()
-    {
-        return $this->scopeConfig->getValue(
-            'makeinfluence/general/s2s_tracking',
-            ScopeInterface::SCOPE_STORE
-        ) === '1';
-    }
-
-    /**
-     * Verifies if frontend tracking is enabled via Stores => Configuration => MakeInfluence => Configuration
-     * @return bool
-     */
-    public function isFrontendTrackingEnabled()
-    {
-        return $this->scopeConfig->getValue(
-            'makeinfluence/general/frontend_tracking',
-            ScopeInterface::SCOPE_STORE
-        ) === '1';
-    }
-
-    /**
-     * Based on data from \Wexo\MakeInfluence\Block\Checkout\Success\Tracking::prepareTrackingData
+     * Based on data from \MakeInfluence\Tracking\Block\Checkout\Success\Tracking::prepareTrackingData
      * Sends a request to Make Influence with tracking information
      * @param $data
      * @return void
@@ -177,12 +153,12 @@ class Tracking extends \Magento\Framework\View\Element\Template
             $response = $client->request('POST', self::MAKEINFLUENCE_TRACKING_URL, [
                 'json' => $data
             ]);
-            $this->logger->debug('[\Wexo\MakeInfluence\Block\Checkout\Success\Tracking::submit] Tracking response for order '.$this->getOrderId(),[
+            $this->logger->debug('[\MakeInfluence\Tracking\Block\Checkout\Success\Tracking::submit] Tracking response for order '.$this->getOrderId(),[
                 'response' => $response->getBody()->getContents(),
                 'data' => $data
             ]);
         } catch (GuzzleException $exception) {
-            $this->logger->error('[\Wexo\MakeInfluence\Block\Checkout\Success\Tracking::submit] Exception' . $exception->getMessage());
+            $this->logger->error('[\MakeInfluence\Tracking\Block\Checkout\Success\Tracking::submit] Exception' . $exception->getMessage());
         }
     }
 }

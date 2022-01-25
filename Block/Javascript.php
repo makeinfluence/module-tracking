@@ -1,4 +1,4 @@
-<?php namespace Wexo\MakeInfluence\Block;
+<?php namespace MakeInfluence\Tracking\Block;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Template;
