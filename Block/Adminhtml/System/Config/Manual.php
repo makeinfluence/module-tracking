@@ -1,6 +1,6 @@
 <?php
 
-namespace Wexo\MakeInfluence\Block\Adminhtml\System\Config;
+namespace MakeInfluence\Tracking\Block\Adminhtml\System\Config;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;

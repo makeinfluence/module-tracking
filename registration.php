@@ -2,6 +2,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Wexo_MakeInfluence',
+    'MakeInfluence_Tracking',
     __DIR__
 );

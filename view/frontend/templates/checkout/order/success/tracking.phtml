@@ -1,12 +1,10 @@
 <?php
-/** @var $block \Wexo\MakeInfluence\Block\Checkout\Success\Tracking */
+/** @var $block \MakeInfluence\Tracking\Block\Checkout\Success\Tracking */
 ?>
 
 <?php
-    if($block->isS2StrackingEnabled()){
-        $data = $block->prepareTrackingData();
-        $block->submit($data);
-    }
+    $data = $block->prepareTrackingData();
+    $block->submit($data);
 ?>
 
 <img src="https://makeinfluence.com/p?bid=<?= $block->getBusinessId() ?>&value=<?= $block->getOrderValue() ?>&uid=<?= $block->getOrderId() ?>&promotion_code=<?= $block->getCouponCode() ?>" alt="MakeInfluence Tracking Pixel">
