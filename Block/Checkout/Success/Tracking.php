@@ -168,6 +168,10 @@ class Tracking extends \Magento\Framework\View\Element\Template
             $response = $client->request('POST', self::MAKEINFLUENCE_TRACKING_URL, [
                 'json' => $data
             ]);
+            $this->logger->debug('[\Wexo\MakeInfluence\Block\Checkout\Success\Tracking::submit] Tracking response for order '.$this->getOrderId(),[
+                'response' => $response->getBody()->getContents(),
+                'data' => $data
+            ]);
         } catch (GuzzleException $exception) {
             $this->logger->error('[\Wexo\MakeInfluence\Block\Checkout\Success\Tracking::submit] Exception' . $exception->getMessage());
         }
