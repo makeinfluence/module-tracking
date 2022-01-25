@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="makeinfluence" translate="label" sortOrder="10">
+            <label>MakeInfluence Tracking</label>
+        </tab>
+        <section id="makeinfluence" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Configuration</label>
+            <tab>makeinfluence</tab>
+            <resource>Wexo_MakeInfluence::tracking_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Tracking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="business_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Business ID</label>
+                    <validate>required-entry</validate>
+                    <comment>Type the Business ID provided by Make Influence here in order to start tracking sales.</comment>
+                    <depends>
+                        <field id="makeinfluence/general/enable">1</field>
+                    </depends>
+<!--                    <backend_model>MakeInfluence\PixelTracking\Model\Validation\BusinessId</backend_model>-->
+                </field>
+                <field id="add_js" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Automatically add Javascript to Pages</label>
+                    <depends>
+                        <field id="makeinfluence/general/enable">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="manual_installation" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Manual Installation Guide</label>
+                    <frontend_model>Wexo\MakeInfluence\Block\Adminhtml\System\Config\Manual</frontend_model>
+                    <depends>
+                        <field id="makeinfluence/general/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

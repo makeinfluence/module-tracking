@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<body>
+    <referenceContainer name="content">
+        <block class="Wexo\MakeInfluence\Block\Checkout\Success\Tracking"
+               name="makeinfluence.checkout.order.success.tracking"
+               template="Wexo_MakeInfluence::checkout/order/success/tracking.phtml"
+               after="-"
+               cacheable="false"
+        />
+    </referenceContainer>
+</body>

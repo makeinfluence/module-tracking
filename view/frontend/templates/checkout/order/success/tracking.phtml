@@ -1,0 +1,25 @@
+<?php
+/** @var $block \Wexo\MakeInfluence\Block\Checkout\Success\Tracking */
+?>
+
+<?php
+    if($block->isS2StrackingEnabled()){
+        $data = $block->prepareTrackingData();
+        $block->submit($data);
+    }
+?>
+
+<img src="https://makeinfluence.com/p?bid=<?= $block->getBusinessId() ?>&value=<?= $block->getOrderValue() ?>&uid=<?= $block->getOrderId() ?>&promotion_code=<?= $block->getCouponCode() ?>" alt="MakeInfluence Tracking Pixel">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        MI.send('conversion', {
+          unique_id: '<?= $block->getOrderId() ?>',
+          value: '<?= $block->getOrderValue() ?>',
+          currency: '<?= $block->getOrderCurrency() ?>',
+          promotion_codes: [
+              '<?= $block->getCouponCode() ?>'
+          ]
+        });
+    });
+</script>
