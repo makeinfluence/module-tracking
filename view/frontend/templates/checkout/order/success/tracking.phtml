@@ -9,6 +9,17 @@
     }
 ?>
 
-<?php if($block->isFrontendTrackingEnabled()): ?>
 <img src="https://makeinfluence.com/p?bid=<?= $block->getBusinessId() ?>&value=<?= $block->getOrderValue() ?>&uid=<?= $block->getOrderId() ?>&promotion_code=<?= $block->getCouponCode() ?>" alt="MakeInfluence Tracking Pixel">
-<?php endif; ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        MI.send('conversion', {
+          unique_id: '<?= $block->getOrderId() ?>',
+          value: '<?= $block->getOrderValue() ?>',
+          currency: '<?= $block->getOrderCurrency() ?>',
+          promotion_codes: [
+              '<?= $block->getCouponCode() ?>'
+          ]
+        });
+    });
+</script>

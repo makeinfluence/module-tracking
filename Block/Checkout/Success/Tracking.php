@@ -111,6 +111,15 @@ class Tracking extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * @return string
+     */
+    public function getOrderCurrency()
+    {
+        $order = $this->getOrder();
+        return $order->getOrderCurrency()->getCurrencyCode();
+    }
+
+    /**
      * @return float|string|null
      */
     public function getCouponCode()
