@@ -106,8 +106,12 @@ class Tracking extends \Magento\Framework\View\Element\Template
      */
     public function getOrderValue()
     {
+        /** @var \Magento\Sales\Model\Order */
         $order = $this->getOrder();
-        return number_format($order->getBaseSubtotalInclTax(), 2, '.', '');
+        $grandTotal = (float) $order->getGrandTotal();
+        $freight = (float) $order->getShippingAmount();
+        $discount = (float) $order->getDiscountAmount();
+        return number_format($grandTotal - $freight - $discount, 2, '.', '');
     }
 
     /**
