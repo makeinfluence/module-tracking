@@ -109,9 +109,10 @@ class Tracking extends \Magento\Framework\View\Element\Template
         /** @var \Magento\Sales\Model\Order */
         $order = $this->getOrder();
         $grandTotal = (float) $order->getGrandTotal();
+        $tax = (float) $order->getTaxAmount();
         $freight = (float) $order->getShippingAmount();
         $discount = (float) $order->getDiscountAmount();
-        return number_format($grandTotal - $freight - $discount, 2, '.', '');
+        return number_format( ($grandTotal - $tax) - $freight - $discount, 2, '.', '');
     }
 
     /**
